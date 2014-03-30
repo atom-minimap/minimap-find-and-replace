@@ -1,0 +1,16 @@
+{
+  "name": "minimap-find-and-replace",
+  "main": "./lib/minimap-find-and-replace",
+  "version": "0.0.0",
+  "description": "Minimap bindings for the find and replace package",
+  "activationEvents": ["minimap-find-and-replace:toggle"],
+  "repository": "https://github.com/abe33/minimap-find-and-replace",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "emissary": "1.x",
+    "mixto": "1.x"
+  }
+}

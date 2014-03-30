@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable minimap-find-and-replace': 'minimap-find-and-replace:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'minimap-find-and-replace'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'minimap-find-and-replace:toggle' }
+      ]
+    ]
+  }
+]
