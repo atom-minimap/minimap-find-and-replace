@@ -1,5 +1,6 @@
 {$} = require 'atom'
 {Subscriber, Emitter} = require 'emissary'
+MinimapFindResultsView = null
 
 module.exports =
 class MinimapFindAndReplaceBinding
@@ -11,6 +12,8 @@ class MinimapFindAndReplaceBinding
   constructor: (@findAndReplacePackage, @minimapPackage) ->
     @minimap = require(@minimapPackage.path)
     @findAndReplace = require(@findAndReplacePackage.path)
+
+    MinimapFindResultsView = require('./minimap-find-results-view')()
 
     $(document).on 'find-and-replace:show', @activate
     atom.workspaceView.on 'core:cancel core:close', @deactivate
@@ -24,8 +27,13 @@ class MinimapFindAndReplaceBinding
 
     @findView = @findAndReplace.findView
     @findModel = @findView.findModel
+    @findResultsView = new MinimapFindResultsView(@findModel)
 
-    @subscribe @findModel, 'updated.find-model', @markersUpdated
+    @subscribe @findModel, 'updated', @markersUpdated
+    @markersUpdated()
+
+    setImmediate =>
+      @findResultsView.markersUpdated(@findModel.markers.concat())
 
     console.log 'activated'
 
@@ -33,7 +41,8 @@ class MinimapFindAndReplaceBinding
     return unless @active
     @active = false
 
-    @subscribe '.find-model'
+    @findResultsView.detach()
+    @unsubscribe @findModel, 'updated'
     console.log 'deactivated'
 
   destroy: ->
@@ -52,4 +61,6 @@ class MinimapFindAndReplaceBinding
 
   minimapIsActive: -> @minimap.active
 
-  markersUpdated: (markers) ->
+  markersUpdated: =>
+    @findResultsView.detach()
+    @findResultsView.attach()

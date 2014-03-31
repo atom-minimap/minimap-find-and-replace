@@ -1,13 +1,16 @@
-findAndReplace = atom.packages.getLoadedPackage('find-and-replace')
+{EditorView} = require 'atom'
 
-FindResultsView = require (findAndReplace.path + '/lib/find-results-view')
+module.exports = ->
+  findAndReplace = atom.packages.getLoadedPackage('find-and-replace')
+  minimap = atom.packages.getLoadedPackage('minimap')
 
-module.exports =
-class MinimapFindResultsView extends FindResultsView
-  attach: -> @getMinimap()?.miniOverlayer.append(this)
+  minimapInstance = require (minimap.path)
+  FindResultsView = require (findAndReplace.path + '/lib/find-results-view')
 
-  getMinimap: ->
-    activeView = atom.workspaceView.getActiveView()
-    if activeView instanceof EditorView then
-      # Fetch minimap for editor view
-    else null
+  class MinimapFindResultsView extends FindResultsView
+    attach: ->
+      @getMinimap()?.miniOverlayer.append(this)
+      @width @getEditor().width()
+
+    getMinimap: ->
+      minimapInstance.minimapForEditorView(@getEditor())
