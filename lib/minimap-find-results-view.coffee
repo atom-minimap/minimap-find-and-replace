@@ -14,3 +14,11 @@ module.exports = ->
 
     getMinimap: ->
       minimapInstance.minimapForEditorView(@getEditor())
+
+    # HACK We don't want the marker to disappear when there not visible in the
+    # editor visible area so we'll hook on the `markersUpdated` method and
+    # replace the corresponding method on the fly.
+    markersUpdated: (markers) ->
+      super(markers)
+      for k,marker of @markerViews
+        marker.intersectsRenderedScreenRows = -> true
