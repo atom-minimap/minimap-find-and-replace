@@ -1,13 +1,15 @@
-MinimapFindAndReplaceView = require './minimap-find-and-replace-view'
+MinimapFindAndReplaceBinding = require './minimap-find-and-replace-binding'
 
 module.exports =
-  minimapFindAndReplaceView: null
-
+  binding: null
   activate: (state) ->
-    @minimapFindAndReplaceView = new MinimapFindAndReplaceView(state.minimapFindAndReplaceViewState)
+    findAndReplace = atom.packages.getLoadedPackage('find-and-replace')
+    minimap = atom.packages.getLoadedPackage('minimap')
+
+    return @deactivate() unless findAndReplace? and minimap?
+
+    @binding = new MinimapFindAndReplaceBinding findAndReplace, minimap
 
   deactivate: ->
-    @minimapFindAndReplaceView.destroy()
-
-  serialize: ->
-    minimapFindAndReplaceViewState: @minimapFindAndReplaceView.serialize()
+    @binding?.deactivate()
+    @binding = null

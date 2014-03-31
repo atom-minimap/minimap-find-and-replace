@@ -1,29 +1,33 @@
 MinimapFindAndReplace = require '../lib/minimap-find-and-replace'
-
-# Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
-#
-# To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
-# or `fdescribe`). Remove the `f` to unfocus the block.
+{WorkspaceView} = require 'atom'
 
 describe "MinimapFindAndReplace", ->
-  activationPromise = null
-
   beforeEach ->
-    atom.workspaceView = new WorkspaceView
-    activationPromise = atom.packages.activatePackage('minimapFindAndReplace')
+    runs ->
+      atom.workspaceView = new WorkspaceView
+      atom.workspaceView.openSync('sample.js')
 
-  describe "when the minimap-find-and-replace:toggle event is triggered", ->
-    it "attaches and then detaches the view", ->
-      expect(atom.workspaceView.find('.minimap-find-and-replace')).not.toExist()
+    runs ->
+      atom.workspaceView.attachToDom()
+      editorView = atom.workspaceView.getActiveView()
+      editorView.setText("This is the file content")
 
-      # This is an activation event, triggering it will cause the package to be
-      # activated.
-      atom.workspaceView.trigger 'minimap-find-and-replace:toggle'
+    waitsForPromise ->
+      promise = atom.packages.activatePackage('minimap')
+      atom.workspaceView.trigger 'minimap:toggle'
+      promise
 
+    waitsForPromise ->
+      promise = atom.packages.activatePackage('find-and-replace')
+      atom.workspaceView.trigger 'find-and-replace:show'
+      promise
+
+  describe "when the toggle event is triggered", ->
+    beforeEach ->
       waitsForPromise ->
-        activationPromise
-
-      runs ->
-        expect(atom.workspaceView.find('.minimap-find-and-replace')).toExist()
+        promise = atom.packages.activatePackage('minimap-find-and-replace')
         atom.workspaceView.trigger 'minimap-find-and-replace:toggle'
-        expect(atom.workspaceView.find('.minimap-find-and-replace')).not.toExist()
+        promise
+
+    it 'should exist', ->
+      expect()
