@@ -20,11 +20,11 @@ module.exports = ->
       @adjustResults()
 
     # As there's a slightly different char width between the minimap font
-    # and the editor font we'll retrieve both widths and compute the ratio
-    # to properly scale the find results.
-    # FIXME I can't wrap my head on why the fixed version of redacted still
-    # returns different widths for chars, so during that time I'll use fixed
-    # scale.
+    # and the editor font we'll retrieve both widths and compute the
+    # ratio to properly scale the find results.
+    # FIXME I can't wrap my head on why the fixed version of redacted
+    # still returns different widths for chars, so during that time
+    # I'll use fixed scale.
     adjustResults: ->
       return if @adjusted
       @css '-webkit-transform', "scale3d(0.69,1,1)"
@@ -33,9 +33,10 @@ module.exports = ->
     getMinimap: ->
       minimapInstance.minimapForEditorView(@getEditor())
 
-    # HACK We don't want the markers to disappear when there not visible in the
-    # editor visible area so we'll hook on the `markersUpdated` method and
-    # replace the corresponding method on the fly.
+    # HACK We don't want the markers to disappear when they're not
+    # visible in the editor visible area so we'll hook on the
+    # `markersUpdated` method and replace the corresponding method
+    # on the fly.
     markersUpdated: (markers) ->
       super(markers)
       for k,marker of @markerViews
