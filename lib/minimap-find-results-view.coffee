@@ -1,4 +1,4 @@
-{EditorView} = require 'atom'
+{$, EditorView} = require 'atom'
 
 # HACK The exports is a function here because we are not sure that the
 # `find-and-replace` and `minimap` packages will be available when this
@@ -17,12 +17,27 @@ module.exports = ->
       minimap = @getMinimap()
       minimap.miniOverlayer.append(this)
 
-      # As there's a slightly different char width between the minimap font
-      # and the editor font we'll retrieve both widths and compute the ratio
-      # to properly scale the find results.
-      minimapWidth = minimap.miniEditorView.find('.line').first().children().width()
-      editorWidth = @getEditor().find('.line').first().children().width()
-      @css '-webkit-transform', "scale3d(#{minimapWidth / editorWidth},1,1)"
+      @adjustResults()
+
+    # As there's a slightly different char width between the minimap font
+    # and the editor font we'll retrieve both widths and compute the ratio
+    # to properly scale the find results.
+    adjustResults: ->
+      return if @adjusted
+
+      minimapFirstLine = minimap.miniEditorView.find('.line').first()
+      editorFirstLine = @getEditor().find('.line').first()
+
+      console.log minimapFirstLine.html()
+      console.log editorFirstLine.html()
+
+      minimapWidth = minimapFirstLine.children().width()
+      editorWidth = editorFirstLine.children().width()
+      ratio = minimapWidth / editorWidth
+
+      @css '-webkit-transform', "scale3d(#{ratio},1,1)"
+
+      @adjusted = true
 
     getMinimap: ->
       minimapInstance.minimapForEditorView(@getEditor())
