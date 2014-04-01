@@ -15,7 +15,7 @@ module.exports = ->
   class MinimapFindResultsView extends FindResultsView
     attach: ->
       @getMinimap()?.miniOverlayer.append(this)
-      @width @getEditor().width()
+      @css '-webkit-tranform', 'scale3d(0.7,1,1)'
 
     getMinimap: ->
       minimapInstance.minimapForEditorView(@getEditor())
