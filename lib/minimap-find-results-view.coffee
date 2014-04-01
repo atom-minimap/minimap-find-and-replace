@@ -22,21 +22,12 @@ module.exports = ->
     # As there's a slightly different char width between the minimap font
     # and the editor font we'll retrieve both widths and compute the ratio
     # to properly scale the find results.
+    # FIXME I can't wrap my head on why the fixed version of redacted still
+    # returns different widths for chars, so during that time I'll use fixed
+    # scale.
     adjustResults: ->
       return if @adjusted
-
-      minimapFirstLine = minimap.miniEditorView.find('.line').first()
-      editorFirstLine = @getEditor().find('.line').first()
-
-      console.log minimapFirstLine.html()
-      console.log editorFirstLine.html()
-
-      minimapWidth = minimapFirstLine.children().width()
-      editorWidth = editorFirstLine.children().width()
-      ratio = minimapWidth / editorWidth
-
-      @css '-webkit-transform', "scale3d(#{ratio},1,1)"
-
+      @css '-webkit-transform', "scale3d(0.69,1,1)"
       @adjusted = true
 
     getMinimap: ->
