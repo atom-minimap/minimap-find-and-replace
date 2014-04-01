@@ -14,8 +14,15 @@ module.exports = ->
 
   class MinimapFindResultsView extends FindResultsView
     attach: ->
-      @getMinimap()?.miniOverlayer.append(this)
-      @css '-webkit-tranform', 'scale3d(0.7,1,1)'
+      minimap = @getMinimap()
+      minimap.miniOverlayer.append(this)
+
+      # As there's a slightly different char width between the minimap font
+      # and the editor font we'll retrieve both widths and compute the ratio
+      # to properly scale the find results.
+      minimapWidth = minimap.miniEditorView.find('.lines').width()
+      editorWidth = @getEditor().find('.lines').width()
+      @css '-webkit-transform', "scale3d(#{minimapWidth / editorWidth},1,1)"
 
     getMinimap: ->
       minimapInstance.minimapForEditorView(@getEditor())
