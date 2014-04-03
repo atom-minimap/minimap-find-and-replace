@@ -1,3 +1,4 @@
+_ = require 'underscore-plus'
 {$} = require 'atom'
 {Subscriber, Emitter} = require 'emissary'
 MinimapFindResultsView = null
@@ -30,12 +31,10 @@ class MinimapFindAndReplaceBinding
     @findResultsView = new MinimapFindResultsView(@findModel)
 
     @subscribe @findModel, 'updated', @markersUpdated
-    @markersUpdated()
 
     setImmediate =>
-      @findResultsView.markersUpdated(@findModel.markers.concat())
-
     console.log 'activated'
+      @findModel.emit('updated', _.clone(@findModel.markers))
 
   deactivate: =>
     return unless @active
