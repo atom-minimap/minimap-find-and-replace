@@ -33,7 +33,6 @@ class MinimapFindAndReplaceBinding
     @subscribe @findModel, 'updated', @markersUpdated
 
     setImmediate =>
-    console.log 'activated'
       @findModel.emit('updated', _.clone(@findModel.markers))
 
   deactivate: =>
@@ -42,7 +41,6 @@ class MinimapFindAndReplaceBinding
 
     @findResultsView.detach()
     @unsubscribe @findModel, 'updated'
-    console.log 'deactivated'
 
   destroy: ->
     @deactivate()
