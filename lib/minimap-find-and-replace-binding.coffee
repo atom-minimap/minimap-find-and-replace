@@ -54,7 +54,8 @@ class MinimapFindAndReplaceBinding
     @minimapPackage = null
     @minimap = null
 
-  findViewIsVisible: -> @findAndReplace.findView?.parent().length isnt 0
+  findViewIsVisible: ->
+    @findAndReplace.findView? and @findAndReplace.findView.parent().length is 1
 
   minimapIsActive: -> @minimap.active
 
