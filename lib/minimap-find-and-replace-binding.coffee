@@ -3,6 +3,8 @@ _ = require 'underscore-plus'
 {Subscriber, Emitter} = require 'emissary'
 MinimapFindResultsView = null
 
+PLUGIN_NAME = 'find-and-replace'
+
 module.exports =
 class MinimapFindAndReplaceBinding
   Subscriber.includeInto(this)
@@ -16,10 +18,21 @@ class MinimapFindAndReplaceBinding
 
     MinimapFindResultsView = require('./minimap-find-results-view')()
 
+    @minimap.registerPlugin PLUGIN_NAME, this
+
+  activatePlugin: ->
     $(document).on 'find-and-replace:show', @activate
     atom.workspaceView.on 'core:cancel core:close', @deactivate
     @subscribe @minimap, 'activated.minimap', @activate
     @subscribe @minimap, 'deactivated.minimap', @deactivate
+
+    @activate() if @findViewIsVisible() and @minimapIsActive()
+
+  deactivatePlugin: ->
+    $(document).off 'find-and-replace:show'
+    atom.workspaceView.off 'core:cancel core:close'
+    @unsubscribe()
+    @deactivate()
 
   activate: =>
     return @deactivate() unless @findViewIsVisible() and @minimapIsActive()
@@ -44,10 +57,6 @@ class MinimapFindAndReplaceBinding
 
   destroy: ->
     @deactivate()
-
-    $(document).off 'find-and-replace:show'
-    atom.workspaceView.off 'core:cancel core:close'
-    @unsubscribe()
 
     @findAndReplacePackage = null
     @findAndReplace = null

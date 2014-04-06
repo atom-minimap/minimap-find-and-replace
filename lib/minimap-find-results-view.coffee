@@ -15,9 +15,10 @@ module.exports = ->
   class MinimapFindResultsView extends FindResultsView
     attach: ->
       minimap = @getMinimap()
-      minimap.miniOverlayer.append(this)
 
-      @adjustResults()
+      if minimap?
+        minimap.miniOverlayer.append(this)
+        @adjustResults()
 
     # As there's a slightly different char width between the minimap font
     # and the editor font we'll retrieve both widths and compute the
@@ -31,7 +32,10 @@ module.exports = ->
       @adjusted = true
 
     getMinimap: ->
-      minimapInstance.minimapForEditorView(@getEditor())
+      editorView = @getEditor()
+      console.log editorView instanceof EditorView
+      if editorView instanceof EditorView
+        return minimapInstance.minimapForEditorView(editorView)
 
     # HACK We don't want the markers to disappear when they're not
     # visible in the editor visible area so we'll hook on the
