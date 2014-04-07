@@ -28,7 +28,7 @@ module.exports = ->
     # I'll use fixed scale.
     adjustResults: ->
       return if @adjusted
-      @css '-webkit-transform', "scale3d(0.69,1,1)"
+      @css '-webkit-transform', "scale3d(#{minimapInstance.getCharWidthRatio()},1,1)"
       @adjusted = true
 
     getMinimap: ->
