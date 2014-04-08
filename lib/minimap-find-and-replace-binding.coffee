@@ -11,6 +11,7 @@ class MinimapFindAndReplaceBinding
   Emitter.includeInto(this)
 
   active: false
+  isActive: -> @active
 
   constructor: (@findAndReplacePackage, @minimapPackage) ->
     @minimap = require(@minimapPackage.path)
