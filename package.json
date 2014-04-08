@@ -3,7 +3,7 @@
   "main": "./lib/minimap-find-and-replace",
   "version": "0.4.1",
   "description": "Minimap bindings for the find and replace package",
-  "repository": "https://github.com/abe33/minimap-find-and-replace",
+  "repository": "https://github.com/atom-minimap/minimap-find-and-replace",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
