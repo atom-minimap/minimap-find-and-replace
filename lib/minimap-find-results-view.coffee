@@ -33,7 +33,6 @@ module.exports = ->
 
     getMinimap: ->
       editorView = @getEditor()
-      console.log editorView instanceof EditorView
       if editorView instanceof EditorView
         return minimapInstance.minimapForEditorView(editorView)
 
