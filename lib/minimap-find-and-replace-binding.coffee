@@ -22,7 +22,7 @@ class MinimapFindAndReplaceBinding
     @minimap.registerPlugin PLUGIN_NAME, this
 
   activatePlugin: ->
-    $(document).on 'find-and-replace:show', @activate
+    $(window).on 'find-and-replace:show find-and-replace:toggle find-and-replace:show-replace', @activate
     atom.workspaceView.on 'core:cancel core:close', @deactivate
     @subscribe @minimap, 'activated.minimap', @activate
     @subscribe @minimap, 'deactivated.minimap', @deactivate
@@ -30,7 +30,7 @@ class MinimapFindAndReplaceBinding
     @activate() if @findViewIsVisible() and @minimapIsActive()
 
   deactivatePlugin: ->
-    $(document).off 'find-and-replace:show'
+    $(window).off 'find-and-replace:show'
     atom.workspaceView.off 'core:cancel core:close'
     @unsubscribe()
     @deactivate()
