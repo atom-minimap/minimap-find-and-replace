@@ -45,4 +45,5 @@ module.exports = ->
       super(markers)
       for k,marker of @markerViews
         marker.intersectsRenderedScreenRows = (range) ->
+          return false unless minimap?
           range.intersectsRowRange(minimap.miniEditorView.firstRenderedScreenRow, minimap.miniEditorView.lastRenderedScreenRow)
