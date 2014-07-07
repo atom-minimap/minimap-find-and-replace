@@ -1,4 +1,4 @@
-{$, EditorView} = require 'atom'
+{$} = require 'atom'
 
 # HACK The exports is a function here because we are not sure that the
 # `find-and-replace` and `minimap` packages will be available when this
@@ -31,9 +31,13 @@ module.exports = ->
       @css '-webkit-transform', "scale3d(#{minimapInstance.getCharWidthRatio()},1,1)"
       @adjusted = true
 
+    getEditor: ->
+      activeView = atom.workspaceView.getActiveView()
+      if activeView?.hasClass('editor') then activeView else null
+
     getMinimap: ->
       editorView = @getEditor()
-      if editorView instanceof EditorView
+      if editorView.hasClass('editor')
         return minimapInstance.minimapForEditorView(editorView)
 
     # HACK We don't want the markers to disappear when they're not
