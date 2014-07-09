@@ -37,8 +37,7 @@ module.exports = ->
 
     getMinimap: ->
       editorView = @getEditor()
-      if editorView.hasClass('editor')
-        return minimapInstance.minimapForEditorView(editorView)
+      return minimapInstance.minimapForEditorView(editorView) if editorView?
 
     # HACK We don't want the markers to disappear when they're not
     # visible in the editor visible area so we'll hook on the
