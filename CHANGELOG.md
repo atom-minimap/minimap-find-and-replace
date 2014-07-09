@@ -1,3 +1,11 @@
+<a name="v0.7.1"></a>
+# v0.7.1 (2014-07-09)
+
+## :bug: Bug Fixes
+
+- Fix error raised when switching to a non editor tab ([e3008d59](https://github.com/atom-minimap/minimap-find-and-replace/commit/e3008d590a1cf9f392c80b5d324d41e5d84eba1a))
+
+
 <a name="v0.7.0"></a>
 # v0.7.0 (2014-07-07)
 
