@@ -1,3 +1,10 @@
+<a name="v0.8.0"></a>
+# v0.8.0 (2014-07-10)
+
+## :sparkles: Features
+
+- Implement using the syntax color for search result in minimap ([0063837b](https://github.com/atom-minimap/minimap-find-and-replace/commit/0063837b46362d512b60a27608e29a9c36c1d214), [atom-minimap/minimap-find-and-replace#1](https://github.com/atom-minimap/minimap-find-and-replace/issues/1))
+
 <a name="v0.7.1"></a>
 # v0.7.1 (2014-07-09)
 
