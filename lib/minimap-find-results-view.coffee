@@ -18,7 +18,7 @@ module.exports = ->
 
       if minimap?
         minimap.miniOverlayer.append(this)
-        @adjustResults()
+        # @adjustResults()
 
     # As there's a slightly different char width between the minimap font
     # and the editor font we'll retrieve both widths and compute the
@@ -50,3 +50,7 @@ module.exports = ->
         marker.intersectsRenderedScreenRows = (range) ->
           return false unless minimap?
           range.intersectsRowRange(minimap.miniEditorView.firstRenderedScreenRow, minimap.miniEditorView.lastRenderedScreenRow)
+
+        marker.editor = minimap
+        marker.updateNeeded = true
+        marker.updateDisplay()
