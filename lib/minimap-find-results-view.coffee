@@ -18,18 +18,6 @@ module.exports = ->
 
       if minimap?
         minimap.miniOverlayer.append(this)
-        # @adjustResults()
-
-    # As there's a slightly different char width between the minimap font
-    # and the editor font we'll retrieve both widths and compute the
-    # ratio to properly scale the find results.
-    # FIXME I can't wrap my head on why the fixed version of redacted
-    # still returns different widths for chars, so during that time
-    # I'll use fixed scale.
-    adjustResults: ->
-      return if @adjusted
-      @css '-webkit-transform', "scale3d(#{minimapInstance.getCharWidthRatio()},1,1)"
-      @adjusted = true
 
     getEditor: ->
       activeView = atom.workspaceView.getActiveView()
