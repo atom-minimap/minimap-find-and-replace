@@ -18,6 +18,7 @@ module.exports = ->
 
       if minimap?
         minimap.miniOverlayer.append(this)
+        @patchMarkers()
 
     getEditor: ->
       activeView = atom.workspaceView.getActiveView()
@@ -34,6 +35,9 @@ module.exports = ->
     markersUpdated: (markers) ->
       minimap = @getMinimap()
       super(markers)
+      @patchMarkers()
+
+    patchMarkers: ->
       for k,marker of @markerViews
         marker.intersectsRenderedScreenRows = (range) ->
           return false unless minimap?
