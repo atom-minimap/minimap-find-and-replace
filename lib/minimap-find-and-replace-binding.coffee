@@ -11,7 +11,8 @@ class MinimapFindAndReplaceBinding
   Emitter.includeInto(this)
 
   active: false
-  isActive: -> @active
+  pluginActive: false
+  isActive: -> @pluginActive
 
   constructor: (@findAndReplacePackage, @minimapPackage) ->
     @minimap = require(@minimapPackage.path)
@@ -28,12 +29,14 @@ class MinimapFindAndReplaceBinding
     @subscribe @minimap, 'deactivated.minimap', @deactivate
 
     @activate() if @findViewIsVisible() and @minimapIsActive()
+    @pluginActive = true
 
   deactivatePlugin: ->
     $(window).off 'find-and-replace:show'
     atom.workspaceView.off 'core:cancel core:close'
     @unsubscribe()
     @deactivate()
+    @pluginActive = false
 
   activate: =>
     return @deactivate() unless @findViewIsVisible() and @minimapIsActive()
