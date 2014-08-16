@@ -1,3 +1,15 @@
+<a name="v1.0.0"></a>
+# v1.0.0 (2014-08-16)
+
+## :sparkles: Features
+
+- Add a specific style for the current search result ([53f6e9cc](https://github.com/atom-minimap/minimap-find-and-replace/commit/53f6e9cc2dd401eb3c80106cef4e3b9b20514f63))
+- Implement support for the minimap position API ([c2bb3d61](https://github.com/atom-minimap/minimap-find-and-replace/commit/c2bb3d610ee1002d4692be6e85c18e2701017d56))
+
+## :bug: Bug Fixes
+
+- Fix missing markers patching on view attachment ([e25718bb](https://github.com/atom-minimap/minimap-find-and-replace/commit/e25718bbc9639095b307f4c38a0dc4bd8d6fad17))
+
 <a name="v0.8.0"></a>
 # v0.8.0 (2014-07-10)
 
