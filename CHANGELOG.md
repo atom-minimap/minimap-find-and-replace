@@ -1,3 +1,10 @@
+<a name="v1.0.1"></a>
+# v1.0.1 (2014-08-17)
+
+## :bug: Bug Fixes
+
+- Fix invalid plugin state ([4d399609](https://github.com/atom-minimap/minimap-find-and-replace/commit/4d399609861418a78ecea0185800fe4637b372dc))
+
 <a name="v1.0.0"></a>
 # v1.0.0 (2014-08-16)
 
