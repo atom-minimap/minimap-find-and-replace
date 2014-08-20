@@ -8,6 +8,9 @@ module.exports =
 
     return @deactivate() unless findPackage? and minimapPackage?
 
+    minimap = require(minimapPackage.path)
+    return @deactivate() unless minimap.versionMatch('2.x')
+
     @binding = new MinimapFindAndReplaceBinding findPackage, minimapPackage
 
   deactivate: ->
