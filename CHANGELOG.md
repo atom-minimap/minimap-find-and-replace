@@ -1,3 +1,10 @@
+<a name="v1.0.2"></a>
+# v1.0.2 (2014-08-20)
+
+## :bug: Bug Fixes
+
+- Fix missing minimap version check in plugin activation ([69259b56](https://github.com/abe33/minimap-find-and-replace/commit/69259b56f9836466cedab43185f8973f3526da5b))
+
 <a name="v1.0.1"></a>
 # v1.0.1 (2014-08-17)
 
