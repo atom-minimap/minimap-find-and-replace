@@ -1,4 +1,5 @@
 {$} = require 'atom'
+fs = require 'fs'
 
 # HACK The exports is a function here because we are not sure that the
 # `find-and-replace` and `minimap` packages will be available when this
@@ -10,7 +11,7 @@ module.exports = ->
   minimap = atom.packages.getLoadedPackage('minimap')
 
   minimapInstance = require (minimap.path)
-  FindResultsView = require (findAndReplace.path + '/lib/find-results-view')
+  FindResultsView = require './find-results-view'
 
   class MinimapFindResultsView extends FindResultsView
     attach: ->
