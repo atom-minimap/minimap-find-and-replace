@@ -1,3 +1,11 @@
+<a name="v1.0.4"></a>
+# v1.0.4 (2014-08-27)
+
+## :bug: Bug Fixes
+
+- Fix deprecated method call ([5172043b](https://github.com/abe33/minimap-find-and-replace/commit/5172043b77451fd946e2e4c0fc9624a0eca40ed6))
+
+
 <a name="v1.0.3"></a>
 # v1.0.3 (2014-08-26)
 
