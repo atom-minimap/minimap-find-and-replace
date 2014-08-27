@@ -57,8 +57,6 @@ class FindResultsView extends View
         delete @markerViews[id]
         markerView.remove()
 
-      editor.requestDisplayUpdate()
-
   destroyAllViews: ->
     @empty()
     @markerViews = {}
