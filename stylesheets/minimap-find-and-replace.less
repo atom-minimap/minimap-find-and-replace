@@ -5,15 +5,6 @@
 @import "ui-variables";
 @import "syntax-variables";
 
-.minimap-wrapper .search-results {
-  -webkit-transform-origin: top left;
-  .marker .region {
-    position: absolute;
-    pointer-events: none;
-    background: @syntax-result-marker-color;
-  }
-
-  .marker.current-result .region {
-    background: @syntax-result-marker-color-selected;  
-  }
+.minimap .search-result {
+  background: @syntax-result-marker-color-selected;
 }

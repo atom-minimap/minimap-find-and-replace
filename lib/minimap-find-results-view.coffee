@@ -1,49 +1,37 @@
-{$} = require 'atom'
-fs = require 'fs'
+{Subscriber} = require 'emissary'
 
-# HACK The exports is a function here because we are not sure that the
-# `find-and-replace` and `minimap` packages will be available when this
-# file is loaded. The binding instance will evaluate the module when
-# created because at that point we're sure that both modules have been
-# loaded.
 module.exports = ->
   findAndReplace = atom.packages.getLoadedPackage('find-and-replace')
   minimap = atom.packages.getLoadedPackage('minimap')
 
   minimapInstance = require (minimap.path)
-  FindResultsView = require './find-results-view'
 
-  class MinimapFindResultsView extends FindResultsView
-    attach: ->
+  class MinimapFindResultsView
+    Subscriber.includeInto(this)
+
+    constructor: (@model) ->
+      @subscribe @model, 'updated', @markersUpdated
+      atom.workspaceView.on 'pane-container:active-pane-item-changed', => @activePaneItemChanged()
+      @decorationsByMarkerId = {}
+
+    destroy: ->
+      @unsubscribe()
+      @destroyDecorations()
+      @decorationsByMarkerId = null
+
+    destroyDecorations: ->
+      decoration.destroy() for id, decoration of @decorationsByMarkerId
+
+    getMinimap: -> minimapInstance.getActiveMinimap()
+
+    markersUpdated: (markers) =>
       minimap = @getMinimap()
+      return unless minimap?
 
-      if minimap?
-        minimap.miniOverlayer.append(this)
-        @patchMarkers()
+      for marker in markers
+        decoration = minimap.decorateMarker(marker, type: 'highlight', scope: '.minimap .search-result')
+        @decorationsByMarkerId[marker.id] = decoration
 
-    getEditor: ->
-      activeView = atom.workspaceView.getActiveView()
-      if activeView?.hasClass('editor') then activeView else null
-
-    getMinimap: ->
-      editorView = @getEditor()
-      return minimapInstance.minimapForEditorView(editorView) if editorView?
-
-    # HACK We don't want the markers to disappear when they're not
-    # visible in the editor visible area so we'll hook on the
-    # `markersUpdated` method and replace the corresponding method
-    # on the fly.
-    markersUpdated: (markers) ->
-      minimap = @getMinimap()
-      super(markers)
-      @patchMarkers()
-
-    patchMarkers: ->
-      for k,marker of @markerViews
-        marker.intersectsRenderedScreenRows = (range) ->
-          return false unless minimap?
-          range.intersectsRowRange(minimap.miniEditorView.firstRenderedScreenRow, minimap.miniEditorView.lastRenderedScreenRow)
-
-        marker.editor = minimap
-        marker.updateNeeded = true
-        marker.updateDisplay()
+    activePaneItemChanged: ->
+      @destroyDecorations()
+      setImmediate => @markersUpdated(@model.markers)

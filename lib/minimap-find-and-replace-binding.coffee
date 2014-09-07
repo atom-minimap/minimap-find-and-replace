@@ -47,17 +47,13 @@ class MinimapFindAndReplaceBinding
     @findModel = @findView.findModel
     @findResultsView = new MinimapFindResultsView(@findModel)
 
-    @subscribe @findModel, 'updated', @markersUpdated
-
     setImmediate =>
       @findModel.emit('updated', _.clone(@findModel.markers))
 
   deactivate: =>
     return unless @active
+    @findResultsView.destroy()
     @active = false
-
-    @findResultsView.detach()
-    @unsubscribe @findModel, 'updated'
 
   destroy: ->
     @deactivate()
@@ -65,13 +61,10 @@ class MinimapFindAndReplaceBinding
     @findAndReplacePackage = null
     @findAndReplace = null
     @minimapPackage = null
+    @findResultsView = null
     @minimap = null
 
   findViewIsVisible: ->
     @findAndReplace.findView? and @findAndReplace.findView.parent().length is 1
 
   minimapIsActive: -> @minimap.active
-
-  markersUpdated: =>
-    @findResultsView.detach()
-    @findResultsView.attach()
