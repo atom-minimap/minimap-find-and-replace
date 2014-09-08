@@ -17,7 +17,7 @@ module.exports = ->
     destroy: ->
       @unsubscribe()
       @destroyDecorations()
-      @decorationsByMarkerId = null
+      @decorationsByMarkerId = {}
 
     destroyDecorations: ->
       decoration.destroy() for id, decoration of @decorationsByMarkerId
