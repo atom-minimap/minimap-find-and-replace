@@ -18,6 +18,7 @@ module.exports = ->
       @unsubscribe()
       @destroyDecorations()
       @decorationsByMarkerId = {}
+      @markers = null
 
     destroyDecorations: ->
       decoration.destroy() for id, decoration of @decorationsByMarkerId
@@ -34,4 +35,4 @@ module.exports = ->
 
     activePaneItemChanged: ->
       @destroyDecorations()
-      setImmediate => @markersUpdated(@model.markers)
+      setImmediate => @markersUpdated(@model.markers) if @markers?
