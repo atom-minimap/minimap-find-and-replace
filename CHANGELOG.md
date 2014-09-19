@@ -1,3 +1,16 @@
+<a name="v3.0.0"></a>
+# v3.0.0 (2014-09-19)
+
+## :sparkles: Features
+
+- Add version test for minimap v3 ([5bff4afe](https://github.com/abe33/minimap-find-and-replace/commit/5bff4afe05b30d0806280bd64b7079dbf36fd17a))
+- Implement support for minimap decoration API ([d83ad2f1](https://github.com/abe33/minimap-find-and-replace/commit/d83ad2f1ee0c94498d6d9be2b1debac8ee09fdd2))
+
+## :bug: Bug Fixes
+
+- Fix markers redraw on pane change after destroy ([b86cd824](https://github.com/abe33/minimap-find-and-replace/commit/b86cd82416abcd2a076088aa8dd6b0e80a4412a5))
+- Fix access to null object after destroy ([3c689bc0](https://github.com/abe33/minimap-find-and-replace/commit/3c689bc0a52d67a7eaaa4c43496d049c62f04f60))
+
 <a name="v1.0.4"></a>
 # v1.0.4 (2014-08-27)
 
