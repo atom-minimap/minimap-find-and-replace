@@ -1,21 +1,39 @@
-MinimapFindAndReplaceBinding = require './minimap-find-and-replace-binding'
+
+requirePackages = (packages...) ->
+  new Promise (resolve, reject) ->
+    required = []
+    promises = []
+    failures = []
+    remains = packages.length
+
+    solved = ->
+      remains--
+      return unless remains is 0
+      return reject(failures) if failures.length > 0
+      resolve(required)
+
+    packages.forEach (pkg, i) ->
+      promises.push(atom.packages.activatePackage(pkg)
+      .then (activatedPackage) ->
+        required[i] = activatedPackage.mainModule
+        solved()
+      .fail (reason) ->
+        failures[i] = reason
+        solved()
+      )
 
 module.exports =
   binding: null
 
   activate: (state) ->
-    disposable = atom.packages.onDidActivateAll =>
-      disposable.dispose()
-
-      findPackage = atom.packages.getLoadedPackage('find-and-replace')
-      minimapPackage = atom.packages.getLoadedPackage('minimap')
-
-      return @deactivate() unless findPackage? and minimapPackage?
-
-      minimap = require(minimapPackage.mainModulePath or minimapPackage.path)
+    requirePackages('minimap', 'find-and-replace').then ([minimap, find]) ->
       return @deactivate() unless minimap.versionMatch('3.x')
 
-      @binding = new MinimapFindAndReplaceBinding findPackage, minimapPackage
+      MinimapFindAndReplaceBinding = require './minimap-find-and-replace-binding'
+      @binding = new MinimapFindAndReplaceBinding find, minimap
+
+    .catch (reasons) ->
+      console.log reasons
 
   deactivate: ->
     @binding?.deactivate()

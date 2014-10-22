@@ -14,10 +14,7 @@ class MinimapFindAndReplaceBinding
   pluginActive: false
   isActive: -> @pluginActive
 
-  constructor: (@findAndReplacePackage, @minimapPackage) ->
-    @minimap = require(@minimapPackage.mainModulePath or @minimapPackage.path)
-    @findAndReplace = require(@findAndReplacePackage.mainModulePath or @findAndReplacePackage.path)
-
+  constructor: (@findAndReplace, @minimap) ->
     MinimapFindResultsView = require('./minimap-find-results-view')()
 
     @minimap.registerPlugin PLUGIN_NAME, this
