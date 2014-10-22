@@ -1,3 +1,10 @@
+<a name="v3.0.2"></a>
+# v3.0.2 (2014-10-22)
+
+## :bug: Bug Fixes
+
+- Delay the package activation to when all packages are active ([bd49e304](https://github.com/abe33/minimap-find-and-replace/commit/bd49e30422867badb323a3916c4ab9681014d3f7))
+
 <a name="v3.0.1"></a>
 # v3.0.1 (2014-10-22)
 
