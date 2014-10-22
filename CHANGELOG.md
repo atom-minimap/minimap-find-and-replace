@@ -1,3 +1,10 @@
+<a name="v3.0.3"></a>
+# v3.0.3 (2014-10-23)
+
+## :bug: Bug Fixes
+
+- Fix accessing packages by using a promise ([7f6b11b8](https://github.com/abe33/minimap-find-and-replace/commit/7f6b11b8416374d5786d4f95d5fec80f5a437f27))
+
 <a name="v3.0.2"></a>
 # v3.0.2 (2014-10-22)
 
