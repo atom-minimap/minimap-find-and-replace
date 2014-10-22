@@ -1,3 +1,10 @@
+<a name="v3.0.1"></a>
+# v3.0.1 (2014-10-22)
+
+## :bug: Bug Fixes
+
+- Fix broken access to package dependencies ([4e2797fa](https://github.com/abe33/minimap-find-and-replace/commit/4e2797fab7df3c778346f6f90b3c8e8981b18fff))
+
 <a name="v3.0.0"></a>
 # v3.0.0 (2014-09-19)
 
