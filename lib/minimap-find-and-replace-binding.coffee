@@ -15,8 +15,8 @@ class MinimapFindAndReplaceBinding
   isActive: -> @pluginActive
 
   constructor: (@findAndReplacePackage, @minimapPackage) ->
-    @minimap = require(@minimapPackage.path)
-    @findAndReplace = require(@findAndReplacePackage.path)
+    @minimap = require(@minimapPackage.mainModulePath or @minimapPackage.path)
+    @findAndReplace = require(@findAndReplacePackage.mainModulePath or @findAndReplacePackage.path)
 
     MinimapFindResultsView = require('./minimap-find-results-view')()
 
