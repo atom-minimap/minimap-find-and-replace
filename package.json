@@ -12,6 +12,7 @@
   "dependencies": {
     "emissary": "1.x",
     "mixto": "1.x",
-    "underscore-plus": "1.x"
+    "underscore-plus": "1.x",
+    "atom-utils": "0.0.1"
   }
 }
