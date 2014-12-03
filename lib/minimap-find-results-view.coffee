@@ -1,4 +1,4 @@
-{Subscriber} = require 'emissary'
+{CompositeDisposable} = require 'event-kit'
 
 module.exports = ->
   findAndReplace = atom.packages.getLoadedPackage('find-and-replace')
@@ -7,15 +7,15 @@ module.exports = ->
   minimapInstance = require (minimap.path)
 
   class MinimapFindResultsView
-    Subscriber.includeInto(this)
 
     constructor: (@model) ->
-      @subscribe @model, 'updated', @markersUpdated
-      atom.workspaceView.on 'pane-container:active-pane-item-changed', => @activePaneItemChanged()
+      @subscriptions = new CompositeDisposable
+      @subscriptions.add @model.onDidUpdate @markersUpdated
+      # atom.workspaceView.on 'pane-container:active-pane-item-changed', => @activePaneItemChanged()
       @decorationsByMarkerId = {}
 
     destroy: ->
-      @unsubscribe()
+      @subscriptions.dispose()
       @destroyDecorations()
       @decorationsByMarkerId = {}
       @markers = null
