@@ -1,3 +1,10 @@
+<a name="v3.0.4"></a>
+# v3.0.4 (2014-12-05)
+
+## :bug: Bug Fixes
+
+- Fix broken plugin since API changes ([a4020640](https://github.com/abe33/minimap-find-and-replace/commit/a4020640bca345a41583c0815e9d7d91c24df0c4))
+
 <a name="v3.0.3"></a>
 # v3.0.3 (2014-10-23)
 
