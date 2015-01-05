@@ -1,3 +1,10 @@
+<a name="v3.1.0"></a>
+# v3.1.0 (2015-01-05)
+
+## :sparkles: Features
+
+- Implement support for both minimap v3 and v4 API ([91085fb3](https://github.com/abe33/minimap-find-and-replace/commit/91085fb38b79680baff0e0e7e12762be32c26c21))
+
 <a name="v3.0.4"></a>
 # v3.0.4 (2014-12-05)
 
