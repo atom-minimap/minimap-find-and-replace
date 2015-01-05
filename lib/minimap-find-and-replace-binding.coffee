@@ -30,7 +30,7 @@ class MinimapFindAndReplaceBinding
     @subscriptions.add @minimap.onDidActivate @activate
     @subscriptions.add @minimap.onDidDeactivate @deactivate
 
-    @activate() if @findViewIsVisible() and @minimapIsActive()
+    @activate() if @findViewIsVisible()
     @pluginActive = true
 
   deactivatePlugin: ->
@@ -39,10 +39,10 @@ class MinimapFindAndReplaceBinding
     @pluginActive = false
 
   activate: =>
-    return @deactivate() unless @findViewIsVisible() and @minimapIsActive()
+    return @deactivate() unless @findViewIsVisible()
     return if @active
 
-    MinimapFindResultsView ||= require('./minimap-find-results-view')()
+    MinimapFindResultsView ||= require('./minimap-find-results-view')(@findAndReplace, @minimap)
 
     @active = true
 
@@ -69,5 +69,3 @@ class MinimapFindAndReplaceBinding
 
   findViewIsVisible: ->
     @findAndReplace.findView? and @findAndReplace.findView.parent().length is 1
-
-  minimapIsActive: -> @minimap.active

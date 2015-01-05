@@ -6,7 +6,7 @@ module.exports =
 
   activate: (state) ->
     requirePackages('minimap', 'find-and-replace').then ([minimap, find]) ->
-      return @deactivate() unless minimap.versionMatch('3.x')
+      return @deactivate() unless minimap.versionMatch('>= 3.0.0')
 
       MinimapFindAndReplaceBinding = require './minimap-find-and-replace-binding'
       @binding = new MinimapFindAndReplaceBinding find, minimap
