@@ -39,6 +39,7 @@ class MinimapFindAndReplaceBinding
     @deactivate()
 
   activate: =>
+    return unless @pluginActive
     return @deactivate() unless @findViewIsVisible()
     return if @active
 
