@@ -1,5 +1,5 @@
 _ = require 'underscore-plus'
-{$} = require 'atom'
+{$} = require 'atom-space-pen-views'
 {Subscriber, Emitter} = require 'emissary'
 {CompositeDisposable} = require 'event-kit'
 MinimapFindResultsView = null
