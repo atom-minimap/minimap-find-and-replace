@@ -20,6 +20,7 @@ class MinimapFindAndReplaceBinding
     @minimap.registerPlugin PLUGIN_NAME, this
 
   activatePlugin: ->
+    @pluginActive = true
     @subscriptions.add atom.commands.add 'atom-workspace',
       'find-and-replace:show': @activate
       'find-and-replace:toggle': @activate
@@ -31,12 +32,11 @@ class MinimapFindAndReplaceBinding
     @subscriptions.add @minimap.onDidDeactivate @deactivate
 
     @activate() if @findViewIsVisible()
-    @pluginActive = true
 
   deactivatePlugin: ->
+    @pluginActive = false
     @subscriptions.dispose()
     @deactivate()
-    @pluginActive = false
 
   activate: =>
     return @deactivate() unless @findViewIsVisible()
