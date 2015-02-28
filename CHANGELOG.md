@@ -1,3 +1,10 @@
+<a name="v4.1.0"></a>
+# v4.1.0 (2015-02-28)
+
+## :sparkles: Features
+
+- Add atom-space-pen-views ([5b257f0e](https://github.com/atom-minimap/minimap-find-and-replace/commit/5b257f0e7c83365463ddd21c3aeb1ccaae409e84))
+
 <a name="v4.0.2"></a>
 # v4.0.2 (2015-02-28)
 
