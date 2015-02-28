@@ -1,3 +1,10 @@
+<a name="v4.0.2"></a>
+# v4.0.2 (2015-02-28)
+
+## :bug: Bug Fixes
+
+- hotfix ([f5aa3a70](https://github.com/atom-minimap/minimap-find-and-replace/commit/f5aa3a7099aedd404595990a771b8e6e60028fe1))
+
 <a name="v4.0.1"></a>
 # v4.0.1 (2015-02-28)
 
