@@ -9,6 +9,13 @@
   "engines": {
     "atom": ">0.50.0"
   },
+  "consumedServices": {
+    "minimap": {
+      "versions": {
+        "1.0.0": "consumeMinimapServiceV1"
+      }
+    }
+  },
   "dependencies": {
     "emissary": "1.x",
     "event-kit": "^0",
