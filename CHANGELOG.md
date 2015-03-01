@@ -13,7 +13,6 @@
 
 - Add atom-space-pen-views ([5b257f0e](https://github.com/atom-minimap/minimap-find-and-replace/commit/5b257f0e7c83365463ddd21c3aeb1ccaae409e84))
 
-
 <a name="v4.0.2"></a>
 # v4.0.2 (2015-02-28)
 
@@ -21,14 +20,12 @@
 
 - hotfix ([f5aa3a70](https://github.com/atom-minimap/minimap-find-and-replace/commit/f5aa3a7099aedd404595990a771b8e6e60028fe1))
 
-
 <a name="v4.0.1"></a>
 # v4.0.1 (2015-02-28)
 
 ## :bug: Bug Fixes
 
 - fix plugin is deactivated still displays markers ([1d576c2e](https://github.com/atom-minimap/minimap-find-and-replace/commit/1d576c2eb89222d340fdbebdac0fedbe6aec36b3))
-
 
 <a name="v4.0.0"></a>
 # v4.0.0 (2015-02-22)
