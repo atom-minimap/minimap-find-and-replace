@@ -1,7 +1,7 @@
 {
   "name": "minimap-find-and-replace",
   "main": "./lib/minimap-find-and-replace",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Minimap bindings for the find and replace package",
   "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
   "repository": "https://github.com/atom-minimap/minimap-find-and-replace",
