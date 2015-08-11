@@ -41,17 +41,16 @@ class MinimapFindAndReplaceBinding
     return unless @pluginActive
     return @deactivate() unless @findViewIsVisible()
     return if @active
-
     MinimapFindResultsView ||= require('./minimap-find-results-view')(@findAndReplace, @minimap)
 
-    @active = true
+    requestAnimationFrame =>
+      @active = true
 
-    @findView = @findAndReplace.findView
-    @findModel = @findView.findModel
-    @findResultsView = new MinimapFindResultsView(@findModel)
+      @findModel = @findAndReplace.findModel
+      @findResultsView = new MinimapFindResultsView(@findModel)
 
-    setImmediate =>
-      @findModel.emitter.emit('did-update', _.clone(@findModel.markers))
+      setImmediate =>
+        @findModel.emitter.emit('did-update', _.clone(@findModel.markers))
 
   deactivate: =>
     return unless @active
