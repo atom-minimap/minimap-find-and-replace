@@ -1,3 +1,10 @@
+<a name="v4.2.1"></a>
+# v4.2.1 (2015-08-11)
+
+## :bug: Bug Fixes
+
+- Fix error raised when quickly opening search after switching tab ([36ab9382](https://github.com/atom-minimap/minimap-find-and-replace/commit/36ab938296535f301fbd56e078cb87aa3dce4fae))
+
 <a name="v4.2.0"></a>
 # v4.2.0 (2015-03-01)
 
