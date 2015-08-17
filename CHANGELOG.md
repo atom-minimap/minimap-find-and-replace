@@ -1,3 +1,8 @@
+<a name="v4.3.0"></a>
+# v4.3.0 (2015-08-17)
+
+This version is a rewrite of the decorations lifecycle that relies on the `DisplayBuffer` markers events rather than accessing the find model directly.
+
 <a name="v4.2.2"></a>
 # v4.2.2 (2015-08-17)
 
