@@ -1,3 +1,10 @@
+<a name="v4.2.2"></a>
+# v4.2.2 (2015-08-17)
+
+## :bug: Bug Fixes
+
+- Fix markers persisting after disabling the plugin ([083597ef](https://github.com/atom-minimap/minimap-find-and-replace/commit/083597ef0d398e40ac23ea5e2423730538d3ad9f))
+
 <a name="v4.2.1"></a>
 # v4.2.1 (2015-08-11)
 
