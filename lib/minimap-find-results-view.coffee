@@ -16,7 +16,9 @@ module.exports = (findAndReplace, minimapPackage) ->
       @markers = null
 
     destroyDecorations: ->
-      decoration.destroy() for id, decoration of @decorationsByMarkerId
+      for id, decoration of @getMinimap().decorationsById
+        if decoration.getProperties().scope is '.minimap .search-result'
+          decoration.destroy()
 
     getMinimap: -> minimapPackage.getActiveMinimap()
 
