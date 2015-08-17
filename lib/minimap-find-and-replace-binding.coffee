@@ -1,70 +1,34 @@
-_ = require 'underscore-plus'
-{Subscriber, Emitter} = require 'emissary'
 {CompositeDisposable} = require 'event-kit'
-MinimapFindResultsView = null
 
-PLUGIN_NAME = 'find-and-replace'
+MARKER_CLASS = 'find-result'
 
 module.exports =
 class MinimapFindAndReplaceBinding
-  Emitter.includeInto(this)
-
-  active: false
-  pluginActive: false
-  isActive: -> @pluginActive
-
-  constructor: (@findAndReplace, @minimap) ->
+  constructor: (@minimap) ->
     @subscriptions = new CompositeDisposable
+    @decorationsByMarkerId = {}
+    @subscriptionsByMarkerId = {}
 
-    @minimap.registerPlugin PLUGIN_NAME, this
+    editor = @minimap.getTextEditor()
 
-  activatePlugin: ->
-    @pluginActive = true
-    @subscriptions.add atom.commands.add 'atom-workspace',
-      'find-and-replace:show': @activate
-      'find-and-replace:toggle': @activate
-      'find-and-replace:show-replace': @activate
-      'core:cancel': @deactivate
-      'core:close': @deactivate
-
-    @subscriptions.add @minimap.onDidActivate @activate
-    @subscriptions.add @minimap.onDidDeactivate @deactivate
-
-    @activate() if @findViewIsVisible()
-
-  deactivatePlugin: ->
-    @pluginActive = false
-    @subscriptions.dispose()
-    @deactivate()
-
-  activate: =>
-    return unless @pluginActive
-    return @deactivate() unless @findViewIsVisible()
-    return if @active
-    MinimapFindResultsView ||= require('./minimap-find-results-view')(@findAndReplace, @minimap)
-
-    requestAnimationFrame =>
-      @active = true
-
-      @findModel = @findAndReplace.findModel
-      @findResultsView = new MinimapFindResultsView(@findModel)
-
-      setImmediate =>
-        @findModel.emitter.emit('did-update', _.clone(@findModel.markers))
-
-  deactivate: =>
-    return unless @active
-    @findResultsView?.destroy()
-    @active = false
+    @subscriptions.add editor.displayBuffer.onDidCreateMarker (marker) =>
+      properties = marker.getProperties()
+      if properties?.class is MARKER_CLASS
+        decoration = @minimap.decorateMarker(marker, {
+          type: 'highlight'
+          scope: ".minimap .search-result"
+        })
+        @decorationsByMarkerId[marker.id] = decoration
+        @subscriptionsByMarkerId[marker.id] = decoration.onDidDestroy =>
+          @subscriptionsByMarkerId[marker.id].dispose()
+          delete @decorationsByMarkerId[marker.id]
+          delete @subscriptionsByMarkerId[marker.id]
 
   destroy: ->
-    @deactivate()
+    decoration.destroy() for id,decoration of @decorationsByMarkerId
+    sub.dispose() for id,sub of @subscriptionsByMarkerId
 
-    @findAndReplacePackage = null
-    @findAndReplace = null
-    @minimapPackage = null
-    @findResultsView = null
+    @subscriptions.dispose()
     @minimap = null
-
-  findViewIsVisible: ->
-    @findAndReplace.findView? and @findAndReplace.findView.parent().length is 1
+    @decorationsByMarkerId = {}
+    @subscriptionsByMarkerId = {}

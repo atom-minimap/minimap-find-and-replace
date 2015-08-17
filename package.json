@@ -17,10 +17,6 @@
     }
   },
   "dependencies": {
-    "atom-utils": "0.0.1",
-    "emissary": "1.x",
-    "event-kit": "^0",
-    "mixto": "1.x",
-    "underscore-plus": "1.x"
+    "event-kit": "^0"
   }
 }

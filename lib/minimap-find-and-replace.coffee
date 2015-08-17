@@ -1,22 +1,44 @@
-
-{requirePackages} = require 'atom-utils'
+{CompositeDisposable} = require 'event-kit'
+MinimapFindAndReplaceBinding = null
 
 module.exports =
-  binding: null
+  active: false
+  bindingsById: {}
+  subscriptionsById: {}
+
+  isActive: -> @active
 
   activate: (state) ->
+    @subscriptions = new CompositeDisposable
 
-  consumeMinimapServiceV1: (minimap) ->
-    requirePackages('find-and-replace').then ([find]) =>
-
-      MinimapFindAndReplaceBinding = require './minimap-find-and-replace-binding'
-      @binding = new MinimapFindAndReplaceBinding find, minimap
-
-    .catch (reasons) ->
-      console.log reasons
+  consumeMinimapServiceV1: (@minimap) ->
+    @minimap.registerPlugin 'find-and-replace', this
 
   deactivate: ->
-    @binding?.deactivate()
-    @minimapPackage = null
-    @findPackage = null
-    @binding = null
+    @minimap.unregisterPlugin 'find-and-replace'
+    @minimap = null
+
+  activatePlugin: ->
+    return if @active
+
+    @active = true
+
+    @minimapsSubscription = @minimap.observeMinimaps (minimap) =>
+      MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
+
+      binding = new MinimapFindAndReplaceBinding(minimap)
+      @bindingsById[minimap.id] = binding
+
+      @subscriptionsById[minimap.id] = minimap.onDidDestroy =>
+        @subscriptionsById[minimap.id].dispose()
+        @bindingsById[minimap.id].destroy()
+
+        delete @bindingsById[minimap.id]
+        delete @subscriptionsById[minimap.id]
+
+  deactivatePlugin: ->
+    return unless @active
+
+    @active = false
+    @minimapsSubscription.dispose()
+    @subscriptions.dispose()
