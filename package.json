@@ -6,6 +6,10 @@
   "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
   "repository": "https://github.com/atom-minimap/minimap-find-and-replace",
   "license": "MIT",
+  "keywords": [
+    "minimap",
+    "find-and-replace"
+  ],
   "engines": {
     "atom": ">0.50.0"
   },
