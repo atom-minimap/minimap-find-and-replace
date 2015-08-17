@@ -52,6 +52,9 @@ module.exports =
     sub.dispose() for id,sub of @subscriptionsById
     binding.destroy() for id,binding of @bindingsById
 
+    @bindingsById = {}
+    @subscriptionsById = {}
+
   discoverMarkers: ->
     binding.discoverMarkers() for id,binding of @bindingsById
 
