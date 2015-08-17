@@ -23,7 +23,7 @@ module.exports =
 
     @active = true
 
-    @minimapsSubscription = @minimap.observeMinimaps (minimap) =>
+    @subscriptions.add @minimap.observeMinimaps (minimap) =>
       MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
 
       binding = new MinimapFindAndReplaceBinding(minimap)
@@ -36,9 +36,24 @@ module.exports =
         delete @bindingsById[minimap.id]
         delete @subscriptionsById[minimap.id]
 
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'find-and-replace:show': => @discoverMarkers()
+      'find-and-replace:toggle': => @discoverMarkers()
+      'find-and-replace:show-replace': => @discoverMarkers()
+      'core:cancel': => @clearBindings()
+      'core:close': => @clearBindings()
+
   deactivatePlugin: ->
     return unless @active
 
     @active = false
-    @minimapsSubscription.dispose()
     @subscriptions.dispose()
+
+    sub.dispose() for id,sub of @subscriptionsById
+    binding.destroy() for id,binding of @bindingsById
+
+  discoverMarkers: ->
+    binding.discoverMarkers() for id,binding of @bindingsById
+
+  clearBindings: ->
+    binding.clear() for id,binding of @bindingsById
