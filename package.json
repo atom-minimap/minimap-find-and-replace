@@ -20,7 +20,5 @@
       }
     }
   },
-  "dependencies": {
-    "event-kit": "^0"
-  }
+  "dependencies": {}
 }

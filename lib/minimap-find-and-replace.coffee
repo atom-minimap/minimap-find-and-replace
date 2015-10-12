@@ -1,4 +1,4 @@
-{CompositeDisposable} = require 'event-kit'
+{CompositeDisposable} = require 'atom'
 MinimapFindAndReplaceBinding = null
 
 module.exports =
