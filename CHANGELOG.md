@@ -1,3 +1,10 @@
+<a name="v4.3.1"></a>
+# v4.3.1 (2015-10-12)
+
+## :bug: Bug Fixes
+
+- Fix use of event-kit ([19c2d542](https://github.com/atom-minimap/minimap-find-and-replace/commit/19c2d5425e485d01b8832a5c8033e16012a2da8c), [#11](https://github.com/atom-minimap/minimap-find-and-replace/issues/11))
+
 <a name="v4.3.0"></a>
 # v4.3.0 (2015-08-17)
 
