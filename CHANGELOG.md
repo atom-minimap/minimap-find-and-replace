@@ -1,3 +1,10 @@
+<a name="v4.3.2"></a>
+# v4.3.2 (2015-11-01)
+
+## :bug: Bug Fixes
+
+- Prevent registering a decoration if it couldn't be created ([32d54ea3](https://github.com/atom-minimap/minimap-find-and-replace/commit/32d54ea3d88b2764c51e28d54f498bd1945c918f), [#12](https://github.com/atom-minimap/minimap-find-and-replace/issues/12))
+
 <a name="v4.3.1"></a>
 # v4.3.1 (2015-10-12)
 
