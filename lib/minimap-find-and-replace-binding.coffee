@@ -50,6 +50,8 @@ class MinimapFindAndReplaceBinding
       type: 'highlight'
       scope: ".minimap .search-result"
     })
+    return unless decoration?
+
     @decorationsByMarkerId[marker.id] = decoration
     @subscriptionsByMarkerId[marker.id] = decoration.onDidDestroy =>
       @subscriptionsByMarkerId[marker.id].dispose()
