@@ -23,6 +23,38 @@ module.exports =
 
     @active = true
 
+    fnrVersion = atom.packages.getLoadedPackage('find-and-replace').metadata.version
+    fnrHasServiceAPI = parseFloat(fnrVersion) >= 0.194
+
+    if fnrHasServiceAPI
+      @initializeServiceAPI()
+    else
+      @initializeLegacyAPI()
+
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'find-and-replace:show': => @discoverMarkers()
+      'find-and-replace:toggle': => @discoverMarkers()
+      'find-and-replace:show-replace': => @discoverMarkers()
+      'core:cancel': => @clearBindings()
+      'core:close': => @clearBindings()
+
+  initializeServiceAPI: ->
+    atom.packages.serviceHub.consume 'find-and-replace', '0.0.1', (fnr) =>
+      @subscriptions.add @minimap.observeMinimaps (minimap) =>
+        MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
+
+        id = minimap.id
+        binding = new MinimapFindAndReplaceBinding(minimap, fnr)
+        @bindingsById[id] = binding
+
+        @subscriptionsById[id] = minimap.onDidDestroy =>
+          @subscriptionsById[id]?.dispose()
+          @bindingsById[id]?.destroy()
+
+          delete @bindingsById[id]
+          delete @subscriptionsById[id]
+
+  initializeLegacyAPI: ->
     @subscriptions.add @minimap.observeMinimaps (minimap) =>
       MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
 
@@ -36,13 +68,6 @@ module.exports =
 
         delete @bindingsById[id]
         delete @subscriptionsById[id]
-
-    @subscriptions.add atom.commands.add 'atom-workspace',
-      'find-and-replace:show': => @discoverMarkers()
-      'find-and-replace:toggle': => @discoverMarkers()
-      'find-and-replace:show-replace': => @discoverMarkers()
-      'core:cancel': => @clearBindings()
-      'core:close': => @clearBindings()
 
   deactivatePlugin: ->
     return unless @active
