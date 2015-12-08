@@ -52,10 +52,11 @@ class MinimapFindAndReplaceBinding
     })
     return unless decoration?
 
-    @decorationsByMarkerId[marker.id] = decoration
-    @subscriptionsByMarkerId[marker.id] = decoration.onDidDestroy =>
-      @subscriptionsByMarkerId[marker.id].dispose()
-      delete @decorationsByMarkerId[marker.id]
-      delete @subscriptionsByMarkerId[marker.id]
+    id = marker.id
+    @decorationsByMarkerId[id] = decoration
+    @subscriptionsByMarkerId[id] = decoration.onDidDestroy =>
+      @subscriptionsByMarkerId[id].dispose()
+      delete @decorationsByMarkerId[id]
+      delete @subscriptionsByMarkerId[id]
 
   findViewIsVisible: -> @findAndReplace()?.findView?.is(':visible')
