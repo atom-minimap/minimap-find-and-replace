@@ -1,3 +1,11 @@
+<a name="v4.4.0"></a>
+# v4.4.0 (2015-12-09)
+
+## :sparkles: Features
+
+- Add support for new find-and-replace service and marker layer ([e9a40522](https://github.com/atom-minimap/minimap-find-and-replace/commit/e9a4052295b67d7d32246b34804f5a431cb2b237))
+  <br>Fixes #14
+
 <a name="v4.3.2"></a>
 # v4.3.2 (2015-11-01)
 
