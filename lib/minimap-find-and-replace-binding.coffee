@@ -54,6 +54,7 @@ class MinimapFindAndReplaceBinding
     decoration = @minimap.decorateMarker(marker, {
       type: 'highlight'
       scope: ".minimap .search-result"
+      plugin: 'find-and-replace'
     })
     return unless decoration?
 
