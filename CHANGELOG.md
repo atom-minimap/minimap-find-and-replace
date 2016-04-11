@@ -1,3 +1,10 @@
+<a name="v4.5.1"></a>
+# v4.5.1 (2016-04-11)
+
+## :bug: Bug Fixes
+
+- Fix issue with latest version that removed the find-result class on markers ([346d8b2d](https://github.com/atom-minimap/minimap-find-and-replace/commit/346d8b2d12d553fd1136515127b58e048185442f))
+
 <a name="v4.5.0"></a>
 # v4.5.0 (2016-03-07)
 
