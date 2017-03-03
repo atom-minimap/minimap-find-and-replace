@@ -70,4 +70,5 @@ class MinimapFindAndReplaceBinding
       delete @decorationsByMarkerId[id]
       delete @subscriptionsByMarkerId[id]
 
-  findViewIsVisible: -> @findAndReplace()?.findView?.is(':visible')
+  findViewIsVisible: ->
+    document.querySelector('.find-and-replace')?
