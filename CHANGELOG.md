@@ -1,3 +1,10 @@
+<a name="v4.5.2"></a>
+# v4.5.2 (2017-03-03)
+
+## :bug: Bug Fixes
+
+- Fix issue with latest fnr version ([185fe01b](https://github.com/atom-minimap/minimap-find-and-replace/commit/185fe01be6b45476e0f27f6892055c50e2372d1e))
+
 <a name="v4.5.1"></a>
 # v4.5.1 (2016-04-11)
 
