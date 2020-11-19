@@ -31,15 +31,17 @@ module.exports =
     else
       @initializeLegacyAPI()
 
-    @subscriptions.add atom.commands.add 'atom-workspace',
-      'find-and-replace:show': => @discoverMarkers()
-      'find-and-replace:toggle': => @discoverMarkers()
-      'find-and-replace:show-replace': => @discoverMarkers()
-      'core:cancel': => @clearBindings()
-      'core:close': => @clearBindings()
-
   initializeServiceAPI: ->
     atom.packages.serviceHub.consume 'find-and-replace', '0.0.1', (fnr) =>
+      [fnrPanel] = atom.workspace.getBottomPanels().filter (panel) ->
+        return panel.element.firstChild.classList.contains "find-and-replace"
+
+      fnrPanel.onDidChangeVisible (visible) =>
+        if visible
+          @discoverMarkers()
+        else
+          @clearBindings()
+
       @subscriptions.add @minimap.observeMinimaps (minimap) =>
         MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
 
