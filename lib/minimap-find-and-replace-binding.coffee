@@ -9,14 +9,9 @@ class MinimapFindAndReplaceBinding
     @decorationsByMarkerId = {}
     @subscriptionsByMarkerId = {}
 
-    if @fnrAPI?
-      @layer = @fnrAPI.resultsMarkerLayerForTextEditor(@editor)
+    @layer = @fnrAPI.resultsMarkerLayerForTextEditor(@editor)
 
-      @subscriptions.add @layer.onDidCreateMarker (marker) =>
-        @handleCreatedMarker(marker)
-    else
-      @subscriptions.add @editor.displayBuffer.onDidCreateMarker (marker) =>
-        @handleCreatedMarker(marker)
+    @subscriptions.add @layer.onDidUpdate => @discoverMarkers()
 
     @discoverMarkers()
 
@@ -39,18 +34,8 @@ class MinimapFindAndReplaceBinding
       decoration.destroy()
       delete @decorationsByMarkerId[id]
 
-  findAndReplace: -> FindAndReplace ?= atom.packages.getLoadedPackage('find-and-replace').mainModule
-
   discoverMarkers: ->
-    if @fnrAPI?
-      @layer.getMarkers().forEach (marker) => @createDecoration(marker)
-    else
-      @editor.findMarkers(class: 'find-result').forEach (marker) =>
-        @createDecoration(marker)
-
-  handleCreatedMarker: (marker) ->
-    if @fnrAPI? or marker.getProperties()?.class is 'find-result'
-      @createDecoration(marker)
+    setImmediate( => @createDecoration(marker) for marker in @layer.getMarkers())
 
   createDecoration: (marker) ->
     return unless @findViewIsVisible()
@@ -61,6 +46,7 @@ class MinimapFindAndReplaceBinding
       scope: ".minimap .search-result"
       plugin: 'find-and-replace'
     })
+
     return unless decoration?
 
     id = marker.id

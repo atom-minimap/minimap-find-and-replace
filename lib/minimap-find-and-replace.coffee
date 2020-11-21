@@ -23,24 +23,11 @@ module.exports =
 
     @active = true
 
-    fnrVersion = atom.packages.getLoadedPackage('find-and-replace').metadata.version
-    fnrHasServiceAPI = parseFloat(fnrVersion) >= 0.194
-
-    if fnrHasServiceAPI
-      @initializeServiceAPI()
-    else
-      @initializeLegacyAPI()
+    @initializeServiceAPI()
 
   initializeServiceAPI: ->
     atom.packages.serviceHub.consume 'find-and-replace', '0.0.1', (fnr) =>
-      [fnrPanel] = atom.workspace.getBottomPanels().filter (panel) ->
-        return panel.element.firstChild.classList.contains "find-and-replace"
-
-      fnrPanel.onDidChangeVisible (visible) =>
-        if visible
-          @discoverMarkers()
-        else
-          @clearBindings()
+      @setOnChangeVisibility()
 
       @subscriptions.add @minimap.observeMinimaps (minimap) =>
         MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
@@ -56,20 +43,22 @@ module.exports =
           delete @bindingsById[id]
           delete @subscriptionsById[id]
 
-  initializeLegacyAPI: ->
-    @subscriptions.add @minimap.observeMinimaps (minimap) =>
-      MinimapFindAndReplaceBinding ?= require './minimap-find-and-replace-binding'
+  setOnChangeVisibility: (num = 1) ->
+    [fnrPanel] = atom.workspace.getBottomPanels().filter (panel) ->
+      return panel.element.firstChild.classList.contains "find-and-replace"
 
-      id = minimap.id
-      binding = new MinimapFindAndReplaceBinding(minimap)
-      @bindingsById[id] = binding
+    if fnrPanel
+      fnrPanel.onDidChangeVisible (visible) =>
+        if visible
+          @discoverMarkers()
+        else
+          @clearBindings()
 
-      @subscriptionsById[id] = minimap.onDidDestroy =>
-        @subscriptionsById[id]?.dispose()
-        @bindingsById[id]?.destroy()
-
-        delete @bindingsById[id]
-        delete @subscriptionsById[id]
+    else
+      if num < 10
+        setTimeout (=> @setOnChangeVisibility(num + 1)), 100
+      else
+        console.error "Couldn't find find-and-replace"
 
   deactivatePlugin: ->
     return unless @active
