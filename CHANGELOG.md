@@ -1,3 +1,10 @@
+<a name="v5.0.0"></a>
+# v5.0.0 (2020-11-20)
+
+## Remove old API
+
+- Remove old API and fix async markers ([91238978](https://github.com/atom-minimap/minimap-find-and-replace/commit/912389787ca44d1089937ddd6268f23f8c7e8b05))
+
 <a name="v4.5.2"></a>
 # v4.5.2 (2017-03-03)
 
