@@ -11,7 +11,11 @@
     "find-and-replace"
   ],
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=1.20.0"
+  },
+  "scripts": {
+    "test": "atom --test spec",
+    "lint": "eslint ."
   },
   "consumedServices": {
     "minimap": {
@@ -20,5 +24,12 @@
       }
     }
   },
-  "dependencies": {}
+  "atomTestRunner": "./spec/runner.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@semantic-release/apm-config": "^8.0.0",
+    "atom-jasmine3-test-runner": "^5.1.8",
+    "eslint": "^7.14.0",
+    "semantic-release": "^17.2.4"
+  }
 }
