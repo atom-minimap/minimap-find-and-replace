@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.0...v5.0.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* decaffeinate ([f388a99](https://github.com/atom-minimap/minimap-find-and-replace/commit/f388a99677b396b39ed68c0cd34260ae717cfc74))
+
 <a name="v5.0.0"></a>
 # v5.0.0 (2020-11-20)
 
