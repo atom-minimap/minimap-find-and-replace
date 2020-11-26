@@ -9,6 +9,10 @@ describe('MinimapFindAndReplace', () => {
 		workspace = atom.views.getView(atom.workspace)
 		jasmine.attachToDOM(workspace)
 
+		// Package activation will be deferred to the configured, activation hook, which is then triggered
+		// Activate activation hook
+		atom.packages.triggerDeferredActivationHooks()
+		atom.packages.triggerActivationHook('core:loaded-shell-environment')
 		await atom.packages.activatePackage('minimap')
 
 		const promise = atom.packages.activatePackage('find-and-replace')
