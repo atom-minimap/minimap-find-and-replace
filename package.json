@@ -24,6 +24,9 @@
       }
     }
   },
+  "activationHooks": [
+    "core:loaded-shell-environment"
+  ],
   "atomTestRunner": "./spec/runner.js",
   "dependencies": {},
   "devDependencies": {
