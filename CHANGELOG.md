@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.2...v5.0.3) (2020-11-28)
+
+
+### Bug Fixes
+
+* add minimap as dependency ([25c7b6b](https://github.com/atom-minimap/minimap-find-and-replace/commit/25c7b6b1ba640a99a0627390be3676d864ca5a2c))
+
 ## [5.0.2](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.1...v5.0.2) (2020-11-28)
 
 
