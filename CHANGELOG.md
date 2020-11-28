@@ -1,3 +1,10 @@
+## [5.0.2](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.1...v5.0.2) (2020-11-28)
+
+
+### Bug Fixes
+
+* add activation hook ([fc56a6e](https://github.com/atom-minimap/minimap-find-and-replace/commit/fc56a6e80cf3d358b2d890a8d354da2906d50051))
+
 ## [5.0.1](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.0...v5.0.1) (2020-11-26)
 
 
