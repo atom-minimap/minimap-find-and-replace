@@ -28,7 +28,14 @@
     "core:loaded-shell-environment"
   ],
   "atomTestRunner": "./spec/runner.js",
-  "dependencies": {},
+  "package-deps": [
+    {
+      "name": "minimap"
+    }
+  ],
+  "dependencies": {
+    "atom-package-deps": "^7.0.2"
+  },
   "devDependencies": {
     "@semantic-release/apm-config": "^8.0.0",
     "atom-jasmine3-test-runner": "^5.1.8",
