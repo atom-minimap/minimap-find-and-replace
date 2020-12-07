@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.3...v5.0.4) (2020-12-07)
+
+
+### Bug Fixes
+
+* only highlight when panel is visible ([#37](https://github.com/atom-minimap/minimap-find-and-replace/issues/37)) ([26ed59f](https://github.com/atom-minimap/minimap-find-and-replace/commit/26ed59f9b01b3a8a92d4112769c971a49a3b151f))
+
 ## [5.0.3](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.2...v5.0.3) (2020-11-28)
 
 
