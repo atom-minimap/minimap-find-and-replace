@@ -32,45 +32,50 @@ describe('MinimapFindAndReplace', () => {
 		describe('when find-and-replace is closed', () => {
 			beforeEach(() => {
 				atom.commands.dispatch(workspace, 'find-and-replace:show')
-				spyOn(MinimapFindAndReplace, 'clearBindings')
+				spyOn(MinimapFindAndReplace, 'changeVisible')
 			})
 
 			it('should clear on core:cancel', () => {
 				atom.commands.dispatch(workspace, 'core:cancel')
-				expect(MinimapFindAndReplace.clearBindings).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(false)
 			})
 
 			it('should clear on find-and-replace:toggle', () => {
 				atom.commands.dispatch(workspace, 'find-and-replace:toggle')
-				atom.commands.dispatch(workspace, 'find-and-replace:toggle')
-				expect(MinimapFindAndReplace.clearBindings).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(false)
 			})
 
 			it('should clear on close button pressed', () => {
 				document.querySelector('.find-and-replace .close-button').click()
-				expect(MinimapFindAndReplace.clearBindings).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(false)
 			})
 		})
 
 		describe('when find-and-replace is opened', () => {
 			beforeEach(() => {
 				atom.commands.dispatch(workspace, 'core:cancel')
-				spyOn(MinimapFindAndReplace, 'discoverMarkers')
+				spyOn(MinimapFindAndReplace, 'changeVisible')
 			})
 
 			it('should display markers on find-and-replace:show', () => {
 				atom.commands.dispatch(workspace, 'find-and-replace:show')
-				expect(MinimapFindAndReplace.discoverMarkers).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(true)
 			})
 
 			it('should display markers on find-and-replace:show-replace', () => {
 				atom.commands.dispatch(workspace, 'find-and-replace:show-replace')
-				expect(MinimapFindAndReplace.discoverMarkers).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(true)
 			})
 
 			it('should display markers on find-and-replace:toggle', () => {
 				atom.commands.dispatch(workspace, 'find-and-replace:toggle')
-				expect(MinimapFindAndReplace.discoverMarkers).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledTimes(1)
+				expect(MinimapFindAndReplace.changeVisible).toHaveBeenCalledWith(true)
 			})
 		})
 	})
