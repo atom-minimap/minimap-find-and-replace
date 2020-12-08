@@ -1,3 +1,10 @@
+## [5.0.5](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.4...v5.0.5) (2020-12-08)
+
+
+### Bug Fixes
+
+* remove panel visibility listener on deactivate ([#38](https://github.com/atom-minimap/minimap-find-and-replace/issues/38)) ([3f826be](https://github.com/atom-minimap/minimap-find-and-replace/commit/3f826be918b4ec5bacc2e4da95cd3a9ddd094875))
+
 ## [5.0.4](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.3...v5.0.4) (2020-12-07)
 
 
