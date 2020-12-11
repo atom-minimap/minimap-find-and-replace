@@ -1,3 +1,10 @@
+## [5.0.6](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.5...v5.0.6) (2020-12-11)
+
+
+### Bug Fixes
+
+* Optimizations ([#39](https://github.com/atom-minimap/minimap-find-and-replace/issues/39)) ([77d2f40](https://github.com/atom-minimap/minimap-find-and-replace/commit/77d2f40c9cfb45e7c3f447fe5fac784e1d85d059))
+
 ## [5.0.5](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.4...v5.0.5) (2020-12-08)
 
 
