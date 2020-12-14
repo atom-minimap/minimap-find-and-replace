@@ -1,3 +1,11 @@
+## [5.0.7](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.6...v5.0.7) (2020-12-14)
+
+
+### Bug Fixes
+
+* **deps:** bump atom-package-deps from 7.0.2 to 7.0.3 ([#42](https://github.com/atom-minimap/minimap-find-and-replace/issues/42)) ([b6ace78](https://github.com/atom-minimap/minimap-find-and-replace/commit/b6ace781c72fecb303cd2e007e21dc56d1ea4ba6))
+* fix deactivate ([6b1be0f](https://github.com/atom-minimap/minimap-find-and-replace/commit/6b1be0f1ef1e5708d989527c2921b484a16ed0d6))
+
 ## [5.0.6](https://github.com/atom-minimap/minimap-find-and-replace/compare/v5.0.5...v5.0.6) (2020-12-11)
 
 
