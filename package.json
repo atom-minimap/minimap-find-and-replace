@@ -34,7 +34,7 @@
     }
   ],
   "dependencies": {
-    "atom-package-deps": "^7.2.3"
+    "atom-package-deps": "^8.0.0"
   },
   "devDependencies": {
     "@semantic-release/apm-config": "^8.0.0",
