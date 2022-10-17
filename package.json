@@ -43,7 +43,7 @@
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-promise": "^6.1.0",
     "eslint-plugin-react": "^7.30.0",
     "semantic-release": "^19.0.2"
   }
